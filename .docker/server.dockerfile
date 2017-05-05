@@ -30,15 +30,15 @@ RUN         apt-get update \
             && rm -rf /var/lib/apt/lists/*
 
 # add entry to crontab
-# RUN (crontab -l 2>/dev/null; echo "* * * * * php /var/www/commercefacile/artisan schedule:run >> /dev/null 2>&1")| crontab -
+# RUN (crontab -l 2>/dev/null; echo "* * * * * php /var/www/artisan schedule:run >> /dev/null 2>&1")| crontab -
 
 
 
 WORKDIR     /var/www
 
-RUN         /usr/local/bin/php /usr/local/bin/composer install
+# RUN         /usr/local/bin/php /usr/local/bin/composer install
 
-RUN         chown -R www-data ./storage && chmod -R 0770 ./storage
+# RUN         chown -R www-data ./storage && chmod -R 0770 ./storage
 
 
 
