@@ -19,8 +19,7 @@
 
     ryme-queue:
         build:
-            context: .
-            dockerfile: .queue
+            context: .queue
         container_name: ryme-queue
         ports:
             - "11300:11300"
