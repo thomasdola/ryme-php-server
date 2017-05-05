@@ -1,0 +1,84 @@
+ version: '2'
+
+ services:
+
+    nginx:
+        build:
+            context: .
+            dockerfile: .docker/nginx.dev.dockerfile
+        container_name: ryme-ngnix
+        volumes:
+            - ./:/var/www/
+        links:
+            - ryme-server
+        ports:
+            - "80:80"
+            - "443:443"
+        networks:
+            - rymeapp-network
+
+    ryme-queue:
+        build:
+            context: .
+            dockerfile: .queue
+        container_name: ryme-queue
+        ports:
+            - "11300:11300"
+            - "8080:8080"
+        networks:
+            - rymeapp-network
+
+    ryme-server:
+        build:
+            context: .
+            dockerfile: .docker/server.dockerfile
+        container_name: ryme-server
+        privileged: true
+        volumes:
+            - ./:/var/www/
+            - /var/lib/redis
+        depends_on:
+            - ryme-db
+        links:
+            - ryme-db
+        networks:
+            - rymeapp-network
+
+    ryme-db:
+        image: postgres:latest
+        container_name: ryme-db
+        ports:
+            - "5432:5432"
+        environment:
+            - POSTGRES_DB=ryme
+            - POSTGRES_USER=ryme
+            - POSTGRES_PASSWORD=ryme
+        networks:
+            - rymeapp-network
+
+    ryme-redis:
+        image: sameersbn/redis
+        container_name: ryme-redis
+        volumes_from:
+            - ryme-server
+        ports:
+            - "6379:6379"
+        networks:
+            - rymeapp-network
+
+    ryme-socket:
+        build:
+            context: .socket
+        container_name: ryme-socket
+        links:
+            - ryme-redis:redis
+        depends_on:
+            - ryme-redis
+        ports:
+            - "8443:8443"
+        networks:
+            - rymeapp-network
+
+ networks:
+    rymeapp-network:
+        driver: bridge

@@ -1,0 +1,16 @@
+{
+  "private": true,
+  "devDependencies": {
+    "gulp": "^3.9.0",
+    "laravel-elixir": "^4.2.0",
+    "laravel-elixir-vueify": "^1.0.2",
+    "lodash": "^3.10.1",
+    "vue-resource": "^0.6.0"
+  },
+  "dependencies": {
+    "bootstrap-sass": "^3.0.0",
+    "moment": "^2.11.1",
+    "mout": "^0.11.1",
+    "number-abbreviate": "^1.0.0"
+  }
+}

@@ -1,0 +1,78 @@
+/* ============================================================
+  COMMON
+============================================================ */
+.cmn-toggle {
+  position: absolute;
+  margin-left: -9999px;
+  visibility: hidden; }
+
+.cmn-toggle + label {
+  display: block;
+  position: relative;
+  cursor: pointer;
+  outline: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none; }
+
+/* ============================================================
+  SWITCH 2 - ROUND FLAT
+============================================================ */
+input.cmn-toggle-round-flat + label {
+  padding: 2px;
+  width: 120px;
+  height: 60px;
+  background-color: #dddddd;
+  border-radius: 60px;
+  transition: background 0.4s; }
+
+input.cmn-toggle-round-flat + label:before, input.cmn-toggle-round-flat + label:after {
+  display: block;
+  position: absolute;
+  content: ""; }
+
+input.cmn-toggle-round-flat + label:before {
+  top: 2px;
+  left: 2px;
+  bottom: 2px;
+  right: 2px;
+  background-color: #fff;
+  border-radius: 60px;
+  transition: background 0.4s; }
+
+input.cmn-toggle-round-flat + label:after {
+  top: 4px;
+  left: 4px;
+  bottom: 4px;
+  width: 52px;
+  background-color: #dddddd;
+  border-radius: 52px;
+  transition: margin 0.4s, background 0.4s; }
+
+input.cmn-toggle-round-flat:checked + label {
+  background-color: #8ce196; }
+
+input.cmn-toggle-round-flat:checked + label:after {
+  margin-left: 60px;
+  background-color: #8ce196; }
+
+.table-fixed thead {
+  width: 97%; }
+
+.table-fixed tbody {
+  height: 230px;
+  overflow-y: auto;
+  width: 100%; }
+
+.table-fixed thead, .table-fixed tbody, .table-fixed tr, .table-fixed td, .table-fixed th {
+  display: block; }
+
+.table-fixed tbody td, .table-fixed thead > tr > th {
+  float: left;
+  border-bottom-width: 0; }
+
+.info-box-text {
+  text-transform: capitalize; }
+
+/*# sourceMappingURL=app.css.map */
