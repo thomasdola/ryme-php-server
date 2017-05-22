@@ -12,22 +12,20 @@
         <div class="box box-default">
             <div class="box-header with-border">
                 <h3 class="box-title">Change Email</h3>
-            </div><!-- /.box-header -->
-            <!-- form start -->
-            {!! Form::open(['method' => 'put', 'route' => ['staff.update', Auth::user()->uuid]]) !!}
+            </div>
+            <form>
                 <input type="hidden" value="email" name="type">
                 <div class="box-body">
                     <div class="form-group">
                         <label for="email">Email address</label>
-                        <input name="email" type="email" value="{{ Auth::user()->email }}"
+                        <input name="email" type="email"
                                class="form-control" id="email" placeholder="Enter email">
                     </div>
-                </div><!-- /.box-body -->
 
                 <div class="box-footer">
                     <button type="submit" class="btn btn-default btn-block">update</button>
                 </div>
-            {!! Form::close() !!}
+            </form>
         </div>
 
     </div>
@@ -38,7 +36,7 @@
                 <h3 class="box-title">Change Password</h3>
             </div><!-- /.box-header -->
             <!-- form start -->
-            {!! Form::open(['method' => 'put', 'route' => ['staff.update', Auth::user()->uuid]]) !!}
+            <form>
                 <div class="box-body">
                     <input type="hidden" value="password" name="type">
                     <div class="form-group">
@@ -61,7 +59,7 @@
                 <div class="box-footer">
                     <button type="submit" class="btn btn-default btn-block">update</button>
                 </div>
-            {!! Form::close() !!}
+            <form>
         </div>
     </div><!-- /.tab-pane -->
   </div>
