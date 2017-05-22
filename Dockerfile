@@ -34,7 +34,9 @@ RUN apt-get update \
 
 
 
-WORKDIR /var/www
+WORKDIR     /var/www
+
+RUN         chown -R www-data ./storage && chmod -R 0770 ./storage
 
 # set container entrypoints
 ENTRYPOINT ["/bin/bash","-c"]
