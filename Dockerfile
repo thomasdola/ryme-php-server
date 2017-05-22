@@ -38,6 +38,8 @@ WORKDIR     /var/www
 
 RUN         chown -R www-data ./storage && chmod -R 0770 ./storage
 
+RUN         chmod 777 -R bootstrap/cache
+
 # set container entrypoints
 ENTRYPOINT ["/bin/bash","-c"]
 CMD ["/usr/bin/supervisord", "-c", "/etc/supervisor/conf.d/supervisord.conf"]

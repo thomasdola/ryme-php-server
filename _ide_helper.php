@@ -1,7 +1,7 @@
 <?php
 /**
  * A helper file for Laravel 5, to provide autocomplete information to your IDE
- * Generated for Laravel 5.2.6 on 2016-03-09.
+ * Generated for Laravel 5.2.6 on 2017-05-22.
  *
  * @author Barry vd. Heuvel <barryvdh@gmail.com>
  * @see https://github.com/barryvdh/laravel-ide-helper
@@ -1849,7 +1849,7 @@ namespace {
          * @static 
          */
         public static function increment($key, $value = 1){
-            return \Illuminate\Cache\FileStore::increment($key, $value);
+            return \Illuminate\Cache\RedisStore::increment($key, $value);
         }
         
         /**
@@ -1861,7 +1861,7 @@ namespace {
          * @static 
          */
         public static function decrement($key, $value = 1){
-            return \Illuminate\Cache\FileStore::decrement($key, $value);
+            return \Illuminate\Cache\RedisStore::decrement($key, $value);
         }
         
         /**
@@ -1871,27 +1871,38 @@ namespace {
          * @static 
          */
         public static function flush(){
-            \Illuminate\Cache\FileStore::flush();
+            \Illuminate\Cache\RedisStore::flush();
         }
         
         /**
-         * Get the Filesystem instance.
+         * Get the Redis connection instance.
          *
-         * @return \Illuminate\Filesystem\Filesystem 
+         * @return \Predis\ClientInterface 
          * @static 
          */
-        public static function getFilesystem(){
-            return \Illuminate\Cache\FileStore::getFilesystem();
+        public static function connection(){
+            return \Illuminate\Cache\RedisStore::connection();
         }
         
         /**
-         * Get the working directory of the cache.
+         * Set the connection name to be used.
          *
-         * @return string 
+         * @param string $connection
+         * @return void 
          * @static 
          */
-        public static function getDirectory(){
-            return \Illuminate\Cache\FileStore::getDirectory();
+        public static function setConnection($connection){
+            \Illuminate\Cache\RedisStore::setConnection($connection);
+        }
+        
+        /**
+         * Get the Redis database instance.
+         *
+         * @return \Illuminate\Redis\Database 
+         * @static 
+         */
+        public static function getRedis(){
+            return \Illuminate\Cache\RedisStore::getRedis();
         }
         
         /**
@@ -1901,7 +1912,18 @@ namespace {
          * @static 
          */
         public static function getPrefix(){
-            return \Illuminate\Cache\FileStore::getPrefix();
+            return \Illuminate\Cache\RedisStore::getPrefix();
+        }
+        
+        /**
+         * Set the cache key prefix.
+         *
+         * @param string $prefix
+         * @return void 
+         * @static 
+         */
+        public static function setPrefix($prefix){
+            \Illuminate\Cache\RedisStore::setPrefix($prefix);
         }
         
     }
@@ -2303,7 +2325,7 @@ namespace {
          */
         public static function useDefaultQueryGrammar(){
             //Method inherited from \Illuminate\Database\Connection            
-            \Illuminate\Database\SQLiteConnection::useDefaultQueryGrammar();
+            \Illuminate\Database\PostgresConnection::useDefaultQueryGrammar();
         }
         
         /**
@@ -2314,7 +2336,7 @@ namespace {
          */
         public static function useDefaultSchemaGrammar(){
             //Method inherited from \Illuminate\Database\Connection            
-            \Illuminate\Database\SQLiteConnection::useDefaultSchemaGrammar();
+            \Illuminate\Database\PostgresConnection::useDefaultSchemaGrammar();
         }
         
         /**
@@ -2325,7 +2347,7 @@ namespace {
          */
         public static function useDefaultPostProcessor(){
             //Method inherited from \Illuminate\Database\Connection            
-            \Illuminate\Database\SQLiteConnection::useDefaultPostProcessor();
+            \Illuminate\Database\PostgresConnection::useDefaultPostProcessor();
         }
         
         /**
@@ -2336,7 +2358,7 @@ namespace {
          */
         public static function getSchemaBuilder(){
             //Method inherited from \Illuminate\Database\Connection            
-            return \Illuminate\Database\SQLiteConnection::getSchemaBuilder();
+            return \Illuminate\Database\PostgresConnection::getSchemaBuilder();
         }
         
         /**
@@ -2348,7 +2370,7 @@ namespace {
          */
         public static function table($table){
             //Method inherited from \Illuminate\Database\Connection            
-            return \Illuminate\Database\SQLiteConnection::table($table);
+            return \Illuminate\Database\PostgresConnection::table($table);
         }
         
         /**
@@ -2359,7 +2381,7 @@ namespace {
          */
         public static function query(){
             //Method inherited from \Illuminate\Database\Connection            
-            return \Illuminate\Database\SQLiteConnection::query();
+            return \Illuminate\Database\PostgresConnection::query();
         }
         
         /**
@@ -2371,7 +2393,7 @@ namespace {
          */
         public static function raw($value){
             //Method inherited from \Illuminate\Database\Connection            
-            return \Illuminate\Database\SQLiteConnection::raw($value);
+            return \Illuminate\Database\PostgresConnection::raw($value);
         }
         
         /**
@@ -2384,7 +2406,7 @@ namespace {
          */
         public static function selectOne($query, $bindings = array()){
             //Method inherited from \Illuminate\Database\Connection            
-            return \Illuminate\Database\SQLiteConnection::selectOne($query, $bindings);
+            return \Illuminate\Database\PostgresConnection::selectOne($query, $bindings);
         }
         
         /**
@@ -2397,7 +2419,7 @@ namespace {
          */
         public static function selectFromWriteConnection($query, $bindings = array()){
             //Method inherited from \Illuminate\Database\Connection            
-            return \Illuminate\Database\SQLiteConnection::selectFromWriteConnection($query, $bindings);
+            return \Illuminate\Database\PostgresConnection::selectFromWriteConnection($query, $bindings);
         }
         
         /**
@@ -2411,7 +2433,7 @@ namespace {
          */
         public static function select($query, $bindings = array(), $useReadPdo = true){
             //Method inherited from \Illuminate\Database\Connection            
-            return \Illuminate\Database\SQLiteConnection::select($query, $bindings, $useReadPdo);
+            return \Illuminate\Database\PostgresConnection::select($query, $bindings, $useReadPdo);
         }
         
         /**
@@ -2424,7 +2446,7 @@ namespace {
          */
         public static function insert($query, $bindings = array()){
             //Method inherited from \Illuminate\Database\Connection            
-            return \Illuminate\Database\SQLiteConnection::insert($query, $bindings);
+            return \Illuminate\Database\PostgresConnection::insert($query, $bindings);
         }
         
         /**
@@ -2437,7 +2459,7 @@ namespace {
          */
         public static function update($query, $bindings = array()){
             //Method inherited from \Illuminate\Database\Connection            
-            return \Illuminate\Database\SQLiteConnection::update($query, $bindings);
+            return \Illuminate\Database\PostgresConnection::update($query, $bindings);
         }
         
         /**
@@ -2450,7 +2472,7 @@ namespace {
          */
         public static function delete($query, $bindings = array()){
             //Method inherited from \Illuminate\Database\Connection            
-            return \Illuminate\Database\SQLiteConnection::delete($query, $bindings);
+            return \Illuminate\Database\PostgresConnection::delete($query, $bindings);
         }
         
         /**
@@ -2463,7 +2485,7 @@ namespace {
          */
         public static function statement($query, $bindings = array()){
             //Method inherited from \Illuminate\Database\Connection            
-            return \Illuminate\Database\SQLiteConnection::statement($query, $bindings);
+            return \Illuminate\Database\PostgresConnection::statement($query, $bindings);
         }
         
         /**
@@ -2476,7 +2498,7 @@ namespace {
          */
         public static function affectingStatement($query, $bindings = array()){
             //Method inherited from \Illuminate\Database\Connection            
-            return \Illuminate\Database\SQLiteConnection::affectingStatement($query, $bindings);
+            return \Illuminate\Database\PostgresConnection::affectingStatement($query, $bindings);
         }
         
         /**
@@ -2488,7 +2510,7 @@ namespace {
          */
         public static function unprepared($query){
             //Method inherited from \Illuminate\Database\Connection            
-            return \Illuminate\Database\SQLiteConnection::unprepared($query);
+            return \Illuminate\Database\PostgresConnection::unprepared($query);
         }
         
         /**
@@ -2500,7 +2522,7 @@ namespace {
          */
         public static function prepareBindings($bindings){
             //Method inherited from \Illuminate\Database\Connection            
-            return \Illuminate\Database\SQLiteConnection::prepareBindings($bindings);
+            return \Illuminate\Database\PostgresConnection::prepareBindings($bindings);
         }
         
         /**
@@ -2513,7 +2535,7 @@ namespace {
          */
         public static function transaction($callback){
             //Method inherited from \Illuminate\Database\Connection            
-            return \Illuminate\Database\SQLiteConnection::transaction($callback);
+            return \Illuminate\Database\PostgresConnection::transaction($callback);
         }
         
         /**
@@ -2524,7 +2546,7 @@ namespace {
          */
         public static function beginTransaction(){
             //Method inherited from \Illuminate\Database\Connection            
-            \Illuminate\Database\SQLiteConnection::beginTransaction();
+            \Illuminate\Database\PostgresConnection::beginTransaction();
         }
         
         /**
@@ -2535,7 +2557,7 @@ namespace {
          */
         public static function commit(){
             //Method inherited from \Illuminate\Database\Connection            
-            \Illuminate\Database\SQLiteConnection::commit();
+            \Illuminate\Database\PostgresConnection::commit();
         }
         
         /**
@@ -2546,7 +2568,7 @@ namespace {
          */
         public static function rollBack(){
             //Method inherited from \Illuminate\Database\Connection            
-            \Illuminate\Database\SQLiteConnection::rollBack();
+            \Illuminate\Database\PostgresConnection::rollBack();
         }
         
         /**
@@ -2557,7 +2579,7 @@ namespace {
          */
         public static function transactionLevel(){
             //Method inherited from \Illuminate\Database\Connection            
-            return \Illuminate\Database\SQLiteConnection::transactionLevel();
+            return \Illuminate\Database\PostgresConnection::transactionLevel();
         }
         
         /**
@@ -2569,7 +2591,7 @@ namespace {
          */
         public static function pretend($callback){
             //Method inherited from \Illuminate\Database\Connection            
-            return \Illuminate\Database\SQLiteConnection::pretend($callback);
+            return \Illuminate\Database\PostgresConnection::pretend($callback);
         }
         
         /**
@@ -2583,7 +2605,7 @@ namespace {
          */
         public static function logQuery($query, $bindings, $time = null){
             //Method inherited from \Illuminate\Database\Connection            
-            \Illuminate\Database\SQLiteConnection::logQuery($query, $bindings, $time);
+            \Illuminate\Database\PostgresConnection::logQuery($query, $bindings, $time);
         }
         
         /**
@@ -2595,7 +2617,7 @@ namespace {
          */
         public static function listen($callback){
             //Method inherited from \Illuminate\Database\Connection            
-            \Illuminate\Database\SQLiteConnection::listen($callback);
+            \Illuminate\Database\PostgresConnection::listen($callback);
         }
         
         /**
@@ -2606,7 +2628,7 @@ namespace {
          */
         public static function isDoctrineAvailable(){
             //Method inherited from \Illuminate\Database\Connection            
-            return \Illuminate\Database\SQLiteConnection::isDoctrineAvailable();
+            return \Illuminate\Database\PostgresConnection::isDoctrineAvailable();
         }
         
         /**
@@ -2619,7 +2641,7 @@ namespace {
          */
         public static function getDoctrineColumn($table, $column){
             //Method inherited from \Illuminate\Database\Connection            
-            return \Illuminate\Database\SQLiteConnection::getDoctrineColumn($table, $column);
+            return \Illuminate\Database\PostgresConnection::getDoctrineColumn($table, $column);
         }
         
         /**
@@ -2630,7 +2652,7 @@ namespace {
          */
         public static function getDoctrineSchemaManager(){
             //Method inherited from \Illuminate\Database\Connection            
-            return \Illuminate\Database\SQLiteConnection::getDoctrineSchemaManager();
+            return \Illuminate\Database\PostgresConnection::getDoctrineSchemaManager();
         }
         
         /**
@@ -2641,7 +2663,7 @@ namespace {
          */
         public static function getDoctrineConnection(){
             //Method inherited from \Illuminate\Database\Connection            
-            return \Illuminate\Database\SQLiteConnection::getDoctrineConnection();
+            return \Illuminate\Database\PostgresConnection::getDoctrineConnection();
         }
         
         /**
@@ -2652,7 +2674,7 @@ namespace {
          */
         public static function getPdo(){
             //Method inherited from \Illuminate\Database\Connection            
-            return \Illuminate\Database\SQLiteConnection::getPdo();
+            return \Illuminate\Database\PostgresConnection::getPdo();
         }
         
         /**
@@ -2663,7 +2685,7 @@ namespace {
          */
         public static function getReadPdo(){
             //Method inherited from \Illuminate\Database\Connection            
-            return \Illuminate\Database\SQLiteConnection::getReadPdo();
+            return \Illuminate\Database\PostgresConnection::getReadPdo();
         }
         
         /**
@@ -2675,7 +2697,7 @@ namespace {
          */
         public static function setPdo($pdo){
             //Method inherited from \Illuminate\Database\Connection            
-            return \Illuminate\Database\SQLiteConnection::setPdo($pdo);
+            return \Illuminate\Database\PostgresConnection::setPdo($pdo);
         }
         
         /**
@@ -2687,7 +2709,7 @@ namespace {
          */
         public static function setReadPdo($pdo){
             //Method inherited from \Illuminate\Database\Connection            
-            return \Illuminate\Database\SQLiteConnection::setReadPdo($pdo);
+            return \Illuminate\Database\PostgresConnection::setReadPdo($pdo);
         }
         
         /**
@@ -2699,7 +2721,7 @@ namespace {
          */
         public static function setReconnector($reconnector){
             //Method inherited from \Illuminate\Database\Connection            
-            return \Illuminate\Database\SQLiteConnection::setReconnector($reconnector);
+            return \Illuminate\Database\PostgresConnection::setReconnector($reconnector);
         }
         
         /**
@@ -2710,7 +2732,7 @@ namespace {
          */
         public static function getName(){
             //Method inherited from \Illuminate\Database\Connection            
-            return \Illuminate\Database\SQLiteConnection::getName();
+            return \Illuminate\Database\PostgresConnection::getName();
         }
         
         /**
@@ -2722,7 +2744,7 @@ namespace {
          */
         public static function getConfig($option){
             //Method inherited from \Illuminate\Database\Connection            
-            return \Illuminate\Database\SQLiteConnection::getConfig($option);
+            return \Illuminate\Database\PostgresConnection::getConfig($option);
         }
         
         /**
@@ -2733,7 +2755,7 @@ namespace {
          */
         public static function getDriverName(){
             //Method inherited from \Illuminate\Database\Connection            
-            return \Illuminate\Database\SQLiteConnection::getDriverName();
+            return \Illuminate\Database\PostgresConnection::getDriverName();
         }
         
         /**
@@ -2744,7 +2766,7 @@ namespace {
          */
         public static function getQueryGrammar(){
             //Method inherited from \Illuminate\Database\Connection            
-            return \Illuminate\Database\SQLiteConnection::getQueryGrammar();
+            return \Illuminate\Database\PostgresConnection::getQueryGrammar();
         }
         
         /**
@@ -2756,7 +2778,7 @@ namespace {
          */
         public static function setQueryGrammar($grammar){
             //Method inherited from \Illuminate\Database\Connection            
-            \Illuminate\Database\SQLiteConnection::setQueryGrammar($grammar);
+            \Illuminate\Database\PostgresConnection::setQueryGrammar($grammar);
         }
         
         /**
@@ -2767,7 +2789,7 @@ namespace {
          */
         public static function getSchemaGrammar(){
             //Method inherited from \Illuminate\Database\Connection            
-            return \Illuminate\Database\SQLiteConnection::getSchemaGrammar();
+            return \Illuminate\Database\PostgresConnection::getSchemaGrammar();
         }
         
         /**
@@ -2779,7 +2801,7 @@ namespace {
          */
         public static function setSchemaGrammar($grammar){
             //Method inherited from \Illuminate\Database\Connection            
-            \Illuminate\Database\SQLiteConnection::setSchemaGrammar($grammar);
+            \Illuminate\Database\PostgresConnection::setSchemaGrammar($grammar);
         }
         
         /**
@@ -2790,7 +2812,7 @@ namespace {
          */
         public static function getPostProcessor(){
             //Method inherited from \Illuminate\Database\Connection            
-            return \Illuminate\Database\SQLiteConnection::getPostProcessor();
+            return \Illuminate\Database\PostgresConnection::getPostProcessor();
         }
         
         /**
@@ -2802,7 +2824,7 @@ namespace {
          */
         public static function setPostProcessor($processor){
             //Method inherited from \Illuminate\Database\Connection            
-            \Illuminate\Database\SQLiteConnection::setPostProcessor($processor);
+            \Illuminate\Database\PostgresConnection::setPostProcessor($processor);
         }
         
         /**
@@ -2813,7 +2835,7 @@ namespace {
          */
         public static function getEventDispatcher(){
             //Method inherited from \Illuminate\Database\Connection            
-            return \Illuminate\Database\SQLiteConnection::getEventDispatcher();
+            return \Illuminate\Database\PostgresConnection::getEventDispatcher();
         }
         
         /**
@@ -2825,7 +2847,7 @@ namespace {
          */
         public static function setEventDispatcher($events){
             //Method inherited from \Illuminate\Database\Connection            
-            \Illuminate\Database\SQLiteConnection::setEventDispatcher($events);
+            \Illuminate\Database\PostgresConnection::setEventDispatcher($events);
         }
         
         /**
@@ -2836,7 +2858,7 @@ namespace {
          */
         public static function pretending(){
             //Method inherited from \Illuminate\Database\Connection            
-            return \Illuminate\Database\SQLiteConnection::pretending();
+            return \Illuminate\Database\PostgresConnection::pretending();
         }
         
         /**
@@ -2847,7 +2869,7 @@ namespace {
          */
         public static function getFetchMode(){
             //Method inherited from \Illuminate\Database\Connection            
-            return \Illuminate\Database\SQLiteConnection::getFetchMode();
+            return \Illuminate\Database\PostgresConnection::getFetchMode();
         }
         
         /**
@@ -2859,7 +2881,7 @@ namespace {
          */
         public static function setFetchMode($fetchMode){
             //Method inherited from \Illuminate\Database\Connection            
-            return \Illuminate\Database\SQLiteConnection::setFetchMode($fetchMode);
+            return \Illuminate\Database\PostgresConnection::setFetchMode($fetchMode);
         }
         
         /**
@@ -2870,7 +2892,7 @@ namespace {
          */
         public static function getQueryLog(){
             //Method inherited from \Illuminate\Database\Connection            
-            return \Illuminate\Database\SQLiteConnection::getQueryLog();
+            return \Illuminate\Database\PostgresConnection::getQueryLog();
         }
         
         /**
@@ -2881,7 +2903,7 @@ namespace {
          */
         public static function flushQueryLog(){
             //Method inherited from \Illuminate\Database\Connection            
-            \Illuminate\Database\SQLiteConnection::flushQueryLog();
+            \Illuminate\Database\PostgresConnection::flushQueryLog();
         }
         
         /**
@@ -2892,7 +2914,7 @@ namespace {
          */
         public static function enableQueryLog(){
             //Method inherited from \Illuminate\Database\Connection            
-            \Illuminate\Database\SQLiteConnection::enableQueryLog();
+            \Illuminate\Database\PostgresConnection::enableQueryLog();
         }
         
         /**
@@ -2903,7 +2925,7 @@ namespace {
          */
         public static function disableQueryLog(){
             //Method inherited from \Illuminate\Database\Connection            
-            \Illuminate\Database\SQLiteConnection::disableQueryLog();
+            \Illuminate\Database\PostgresConnection::disableQueryLog();
         }
         
         /**
@@ -2914,7 +2936,7 @@ namespace {
          */
         public static function logging(){
             //Method inherited from \Illuminate\Database\Connection            
-            return \Illuminate\Database\SQLiteConnection::logging();
+            return \Illuminate\Database\PostgresConnection::logging();
         }
         
         /**
@@ -2925,7 +2947,7 @@ namespace {
          */
         public static function getDatabaseName(){
             //Method inherited from \Illuminate\Database\Connection            
-            return \Illuminate\Database\SQLiteConnection::getDatabaseName();
+            return \Illuminate\Database\PostgresConnection::getDatabaseName();
         }
         
         /**
@@ -2937,7 +2959,7 @@ namespace {
          */
         public static function setDatabaseName($database){
             //Method inherited from \Illuminate\Database\Connection            
-            return \Illuminate\Database\SQLiteConnection::setDatabaseName($database);
+            return \Illuminate\Database\PostgresConnection::setDatabaseName($database);
         }
         
         /**
@@ -2948,7 +2970,7 @@ namespace {
          */
         public static function getTablePrefix(){
             //Method inherited from \Illuminate\Database\Connection            
-            return \Illuminate\Database\SQLiteConnection::getTablePrefix();
+            return \Illuminate\Database\PostgresConnection::getTablePrefix();
         }
         
         /**
@@ -2960,7 +2982,7 @@ namespace {
          */
         public static function setTablePrefix($prefix){
             //Method inherited from \Illuminate\Database\Connection            
-            \Illuminate\Database\SQLiteConnection::setTablePrefix($prefix);
+            \Illuminate\Database\PostgresConnection::setTablePrefix($prefix);
         }
         
         /**
@@ -2972,7 +2994,7 @@ namespace {
          */
         public static function withTablePrefix($grammar){
             //Method inherited from \Illuminate\Database\Connection            
-            return \Illuminate\Database\SQLiteConnection::withTablePrefix($grammar);
+            return \Illuminate\Database\PostgresConnection::withTablePrefix($grammar);
         }
         
     }
@@ -5957,11 +5979,10 @@ namespace {
          * @param mixed $data
          * @param string $queue
          * @return mixed 
-         * @throws \Throwable
          * @static 
          */
         public static function push($job, $data = '', $queue = null){
-            return \Illuminate\Queue\SyncQueue::push($job, $data, $queue);
+            return \Illuminate\Queue\BeanstalkdQueue::push($job, $data, $queue);
         }
         
         /**
@@ -5974,7 +5995,7 @@ namespace {
          * @static 
          */
         public static function pushRaw($payload, $queue = null, $options = array()){
-            return \Illuminate\Queue\SyncQueue::pushRaw($payload, $queue, $options);
+            return \Illuminate\Queue\BeanstalkdQueue::pushRaw($payload, $queue, $options);
         }
         
         /**
@@ -5988,7 +6009,7 @@ namespace {
          * @static 
          */
         public static function later($delay, $job, $data = '', $queue = null){
-            return \Illuminate\Queue\SyncQueue::later($delay, $job, $data, $queue);
+            return \Illuminate\Queue\BeanstalkdQueue::later($delay, $job, $data, $queue);
         }
         
         /**
@@ -5999,7 +6020,40 @@ namespace {
          * @static 
          */
         public static function pop($queue = null){
-            return \Illuminate\Queue\SyncQueue::pop($queue);
+            return \Illuminate\Queue\BeanstalkdQueue::pop($queue);
+        }
+        
+        /**
+         * Delete a message from the Beanstalk queue.
+         *
+         * @param string $queue
+         * @param string $id
+         * @return void 
+         * @static 
+         */
+        public static function deleteMessage($queue, $id){
+            \Illuminate\Queue\BeanstalkdQueue::deleteMessage($queue, $id);
+        }
+        
+        /**
+         * Get the queue or return the default.
+         *
+         * @param string|null $queue
+         * @return string 
+         * @static 
+         */
+        public static function getQueue($queue){
+            return \Illuminate\Queue\BeanstalkdQueue::getQueue($queue);
+        }
+        
+        /**
+         * Get the underlying Pheanstalk instance.
+         *
+         * @return \Pheanstalk\Pheanstalk 
+         * @static 
+         */
+        public static function getPheanstalk(){
+            return \Illuminate\Queue\BeanstalkdQueue::getPheanstalk();
         }
         
         /**
@@ -6013,7 +6067,7 @@ namespace {
          */
         public static function pushOn($queue, $job, $data = ''){
             //Method inherited from \Illuminate\Queue\Queue            
-            return \Illuminate\Queue\SyncQueue::pushOn($queue, $job, $data);
+            return \Illuminate\Queue\BeanstalkdQueue::pushOn($queue, $job, $data);
         }
         
         /**
@@ -6028,7 +6082,7 @@ namespace {
          */
         public static function laterOn($queue, $delay, $job, $data = ''){
             //Method inherited from \Illuminate\Queue\Queue            
-            return \Illuminate\Queue\SyncQueue::laterOn($queue, $delay, $job, $data);
+            return \Illuminate\Queue\BeanstalkdQueue::laterOn($queue, $delay, $job, $data);
         }
         
         /**
@@ -6042,7 +6096,7 @@ namespace {
          */
         public static function bulk($jobs, $data = '', $queue = null){
             //Method inherited from \Illuminate\Queue\Queue            
-            return \Illuminate\Queue\SyncQueue::bulk($jobs, $data, $queue);
+            return \Illuminate\Queue\BeanstalkdQueue::bulk($jobs, $data, $queue);
         }
         
         /**
@@ -6054,7 +6108,7 @@ namespace {
          */
         public static function setContainer($container){
             //Method inherited from \Illuminate\Queue\Queue            
-            \Illuminate\Queue\SyncQueue::setContainer($container);
+            \Illuminate\Queue\BeanstalkdQueue::setContainer($container);
         }
         
         /**
@@ -6066,7 +6120,7 @@ namespace {
          */
         public static function setEncrypter($crypt){
             //Method inherited from \Illuminate\Queue\Queue            
-            \Illuminate\Queue\SyncQueue::setEncrypter($crypt);
+            \Illuminate\Queue\BeanstalkdQueue::setEncrypter($crypt);
         }
         
     }
@@ -12116,6 +12170,43 @@ namespace {
          */
         public static function setTokenType($tokenType){
             return \LucaDegasperi\OAuth2Server\Authorizer::setTokenType($tokenType);
+        }
+        
+    }
+
+
+    class Searchy extends \TomLingham\Searchy\Facades\Searchy{
+        
+        /**
+         * 
+         *
+         * @param $searchable
+         * @return $this 
+         * @static 
+         */
+        public static function search($searchable){
+            return \TomLingham\Searchy\SearchBuilder::search($searchable);
+        }
+        
+        /**
+         * 
+         *
+         * @return \TomLingham\Searchy\FuzzySearchDriver 
+         * @static 
+         */
+        public static function fields(){
+            return \TomLingham\Searchy\SearchBuilder::fields();
+        }
+        
+        /**
+         * 
+         *
+         * @param $driverName
+         * @return $this 
+         * @static 
+         */
+        public static function driver($driverName){
+            return \TomLingham\Searchy\SearchBuilder::driver($driverName);
         }
         
     }
